@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='m3ushuffler',
-    version='0.1.0',
+    version='0.2.0',
     author='Jan Holthuis',
     author_email='holthuis.jan@googlemail.com',
     description='Shuffle M3U playlists easily',
