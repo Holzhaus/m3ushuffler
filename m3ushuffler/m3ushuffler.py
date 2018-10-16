@@ -36,8 +36,8 @@ def write_m3u(fp, playlist):
     logger.info('%d items written to M3U playlist', num_items)
 
 
-def shuffle_m3u(input_fp, output_fp):
-    random.seed(None)
+def shuffle_m3u(input_fp, output_fp, seed=None):
+    random.seed(seed)
     playlist = list(read_m3u(input_fp))
     random.shuffle(playlist)
     write_m3u(output_fp, playlist)
@@ -52,9 +52,11 @@ def main(args=None):
             help='The M3U output file to write to')
     parser.add_argument('-d', '--debug', action='store_true',
             help='Show debug messages')
+    parser.add_argument('-s', '--seed', type=int, default=None,
+            help='Use a specific seed for the randomness generator')
     pargs = parser.parse_args(args)
 
     logging.basicConfig(level=logging.DEBUG if pargs.debug else
             logging.INFO)
 
-    return shuffle_m3u(pargs.input_file, pargs.output_file)
+    return shuffle_m3u(pargs.input_file, pargs.output_file, seed=pargs.seed)
